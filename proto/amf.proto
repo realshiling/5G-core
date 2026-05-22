@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package amf;
+
+option go_package = "github.com/5g-core/proto/amf"; //指定生成的代码放哪个包里
+
+// UE 发起注册请求
+message RegisterRequest {
+  string ue_id        = 1;  // 设备唯一ID，比如 "UE-001"
+  string ue_type      = 2;  // 设备类型，比如 "smartphone"
+  float  signal_power = 3;  // 信道质量：信号强度 (dBm)
+  float  sinr         = 4;  // 信噪比 (dB)，老师信道建模的核心指标
+}
+
+// AMF 返回注册结果
+message RegisterResponse {
+  bool   success   = 1;  // 是否注册成功
+  string amf_ue_id = 2;  // AMF 分配的内部ID
+  string message   = 3;  // 附加信息
+}
+
+// UE 发起断开请求
+message DeregisterRequest {
+  string ue_id     = 1;
+  string amf_ue_id = 2;
+}
+
+//AMF返回断开结果
+message DeregisterResponse {
+  bool   success = 1;
+  string message = 2;
+}
+
+// AMF 对外暴露的服务
+service AMFService {
+  rpc Register   (RegisterRequest)   returns (RegisterResponse);
+  rpc Deregister (DeregisterRequest) returns (DeregisterResponse);
+}
