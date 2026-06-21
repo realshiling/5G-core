@@ -4,29 +4,40 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"time"
 
 	amfpb "github.com/5g-core/proto/amf"
+	smfpb "github.com/5g-core/proto/smf"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 )
 
-// AMFHandler 实现 AMFService 接口
 type AMFHandler struct {
 	amfpb.UnimplementedAMFServiceServer
-	// 存储已注册的 UE，key 是 ue_id，value 是 amf_ue_id
-	registeredUEs map[string]string
+	registeredUEs map[string]string // ue_id -> amf_ue_id
+	smfClient     smfpb.SMFServiceClient
 }
 
 func NewAMFHandler() *AMFHandler {
+	// AMF 启动时连接 SMF
+	conn, err := grpc.NewClient("localhost:50052",
+		grpc.WithTransportCredentials(insecure.NewCredentials()),
+	)
+	if err != nil {
+		log.Fatalf("AMF 连接 SMF 失败: %v", err)
+	}
+
 	return &AMFHandler{
 		registeredUEs: make(map[string]string),
+		smfClient:     smfpb.NewSMFServiceClient(conn),
 	}
 }
 
-// Register 处理 UE 注册请求
 func (h *AMFHandler) Register(ctx context.Context, req *amfpb.RegisterRequest) (*amfpb.RegisterResponse, error) {
 	log.Printf("收到注册请求: UE_ID=%s, 信号强度=%.2f dBm, SINR=%.2f dB",
 		req.UeId, req.SignalPower, req.Sinr)
 
-	// 检查信道质量，信号太差拒绝注册
+	// 检查信道质量
 	if req.SignalPower < -110 {
 		return &amfpb.RegisterResponse{
 			Success: false,
@@ -34,20 +45,34 @@ func (h *AMFHandler) Register(ctx context.Context, req *amfpb.RegisterRequest) (
 		}, nil
 	}
 
-	// 分配一个 AMF 内部 ID
+	// 分配 AMF 内部 ID
 	amfUeID := fmt.Sprintf("AMF-%s-001", req.UeId)
 	h.registeredUEs[req.UeId] = amfUeID
-
 	log.Printf("注册成功: UE_ID=%s -> AMF_UE_ID=%s", req.UeId, amfUeID)
+
+	// 注册成功后，自动请求 SMF 建立会话
+	smfCtx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	smfResp, err := h.smfClient.CreateSession(smfCtx, &smfpb.CreateSessionRequest{
+		UeId:    req.UeId,
+		AmfUeId: amfUeID,
+		Dnn:     "internet",
+	})
+	if err != nil {
+		log.Printf("AMF 请求 SMF 建立会话失败: %v", err)
+	} else if smfResp.Success {
+		log.Printf("SMF 会话建立成功: SESSION_ID=%s, UE_IP=%s",
+			smfResp.SessionId, smfResp.UeIp)
+	}
 
 	return &amfpb.RegisterResponse{
 		Success: true,
 		AmfUeId: amfUeID,
-		Message: "注册成功",
+		Message: fmt.Sprintf("注册成功，已分配IP: %s", smfResp.UeIp),
 	}, nil
 }
 
-// Deregister 处理 UE 去注册请求
 func (h *AMFHandler) Deregister(ctx context.Context, req *amfpb.DeregisterRequest) (*amfpb.DeregisterResponse, error) {
 	log.Printf("收到去注册请求: UE_ID=%s", req.UeId)
 

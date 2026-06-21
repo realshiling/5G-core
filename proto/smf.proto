@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package smf;
+
+option go_package = "github.com/5g-core/proto/smf";
+
+// AMF 向 SMF 请求建立会话
+message CreateSessionRequest {
+  string ue_id     = 1;  // 设备ID
+  string amf_ue_id = 2;  // AMF分配的内部ID
+  string dnn       = 3;  // 数据网络名称，比如 "internet"
+}
+
+// SMF 返回会话结果
+message CreateSessionResponse {
+  bool   success    = 1;
+  string session_id = 2;  // SMF分配的会话ID
+  string ue_ip      = 3;  // 分配给UE的IP地址
+  string message    = 4;
+}
+
+// 删除会话
+message DeleteSessionRequest {
+  string session_id = 1;
+  string ue_id      = 2;
+}
+
+message DeleteSessionResponse {
+  bool   success = 1;
+  string message = 2;
+}
+
+service SMFService {
+  rpc CreateSession (CreateSessionRequest) returns (CreateSessionResponse);
+  rpc DeleteSession (DeleteSessionRequest) returns (DeleteSessionResponse);
+}
