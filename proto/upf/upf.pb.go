@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.11
 // 	protoc        v7.35.0
-// source: proto/upf.proto
+// source: upf.proto
 
 package upf
 
@@ -34,7 +34,7 @@ type CreateRuleRequest struct {
 
 func (x *CreateRuleRequest) Reset() {
 	*x = CreateRuleRequest{}
-	mi := &file_proto_upf_proto_msgTypes[0]
+	mi := &file_upf_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -46,7 +46,7 @@ func (x *CreateRuleRequest) String() string {
 func (*CreateRuleRequest) ProtoMessage() {}
 
 func (x *CreateRuleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_upf_proto_msgTypes[0]
+	mi := &file_upf_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -59,7 +59,7 @@ func (x *CreateRuleRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateRuleRequest.ProtoReflect.Descriptor instead.
 func (*CreateRuleRequest) Descriptor() ([]byte, []int) {
-	return file_proto_upf_proto_rawDescGZIP(), []int{0}
+	return file_upf_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *CreateRuleRequest) GetSessionId() string {
@@ -101,7 +101,7 @@ type CreateRuleResponse struct {
 
 func (x *CreateRuleResponse) Reset() {
 	*x = CreateRuleResponse{}
-	mi := &file_proto_upf_proto_msgTypes[1]
+	mi := &file_upf_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -113,7 +113,7 @@ func (x *CreateRuleResponse) String() string {
 func (*CreateRuleResponse) ProtoMessage() {}
 
 func (x *CreateRuleResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_upf_proto_msgTypes[1]
+	mi := &file_upf_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -126,7 +126,7 @@ func (x *CreateRuleResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateRuleResponse.ProtoReflect.Descriptor instead.
 func (*CreateRuleResponse) Descriptor() ([]byte, []int) {
-	return file_proto_upf_proto_rawDescGZIP(), []int{1}
+	return file_upf_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *CreateRuleResponse) GetSuccess() bool {
@@ -161,7 +161,7 @@ type DeleteRuleRequest struct {
 
 func (x *DeleteRuleRequest) Reset() {
 	*x = DeleteRuleRequest{}
-	mi := &file_proto_upf_proto_msgTypes[2]
+	mi := &file_upf_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -173,7 +173,7 @@ func (x *DeleteRuleRequest) String() string {
 func (*DeleteRuleRequest) ProtoMessage() {}
 
 func (x *DeleteRuleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_upf_proto_msgTypes[2]
+	mi := &file_upf_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -186,7 +186,7 @@ func (x *DeleteRuleRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteRuleRequest.ProtoReflect.Descriptor instead.
 func (*DeleteRuleRequest) Descriptor() ([]byte, []int) {
-	return file_proto_upf_proto_rawDescGZIP(), []int{2}
+	return file_upf_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *DeleteRuleRequest) GetRuleId() string {
@@ -213,7 +213,7 @@ type DeleteRuleResponse struct {
 
 func (x *DeleteRuleResponse) Reset() {
 	*x = DeleteRuleResponse{}
-	mi := &file_proto_upf_proto_msgTypes[3]
+	mi := &file_upf_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -225,7 +225,7 @@ func (x *DeleteRuleResponse) String() string {
 func (*DeleteRuleResponse) ProtoMessage() {}
 
 func (x *DeleteRuleResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_upf_proto_msgTypes[3]
+	mi := &file_upf_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -238,7 +238,7 @@ func (x *DeleteRuleResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteRuleResponse.ProtoReflect.Descriptor instead.
 func (*DeleteRuleResponse) Descriptor() ([]byte, []int) {
-	return file_proto_upf_proto_rawDescGZIP(), []int{3}
+	return file_upf_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *DeleteRuleResponse) GetSuccess() bool {
@@ -259,13 +259,14 @@ func (x *DeleteRuleResponse) GetMessage() string {
 type GetStatsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	RuleId        string                 `protobuf:"bytes,1,opt,name=rule_id,json=ruleId,proto3" json:"rule_id,omitempty"`
+	SessionId     string                 `protobuf:"bytes,2,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetStatsRequest) Reset() {
 	*x = GetStatsRequest{}
-	mi := &file_proto_upf_proto_msgTypes[4]
+	mi := &file_upf_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -277,7 +278,7 @@ func (x *GetStatsRequest) String() string {
 func (*GetStatsRequest) ProtoMessage() {}
 
 func (x *GetStatsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_upf_proto_msgTypes[4]
+	mi := &file_upf_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -290,12 +291,19 @@ func (x *GetStatsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetStatsRequest.ProtoReflect.Descriptor instead.
 func (*GetStatsRequest) Descriptor() ([]byte, []int) {
-	return file_proto_upf_proto_rawDescGZIP(), []int{4}
+	return file_upf_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *GetStatsRequest) GetRuleId() string {
 	if x != nil {
 		return x.RuleId
+	}
+	return ""
+}
+
+func (x *GetStatsRequest) GetSessionId() string {
+	if x != nil {
+		return x.SessionId
 	}
 	return ""
 }
@@ -306,13 +314,15 @@ type GetStatsResponse struct {
 	UeIp             string                 `protobuf:"bytes,2,opt,name=ue_ip,json=ueIp,proto3" json:"ue_ip,omitempty"`
 	PacketsForwarded uint64                 `protobuf:"varint,3,opt,name=packets_forwarded,json=packetsForwarded,proto3" json:"packets_forwarded,omitempty"` // 已转发包数量
 	Active           bool                   `protobuf:"varint,4,opt,name=active,proto3" json:"active,omitempty"`
+	SessionId        string                 `protobuf:"bytes,5,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
+	UeId             string                 `protobuf:"bytes,6,opt,name=ue_id,json=ueId,proto3" json:"ue_id,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
 
 func (x *GetStatsResponse) Reset() {
 	*x = GetStatsResponse{}
-	mi := &file_proto_upf_proto_msgTypes[5]
+	mi := &file_upf_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -324,7 +334,7 @@ func (x *GetStatsResponse) String() string {
 func (*GetStatsResponse) ProtoMessage() {}
 
 func (x *GetStatsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_upf_proto_msgTypes[5]
+	mi := &file_upf_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -337,7 +347,7 @@ func (x *GetStatsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetStatsResponse.ProtoReflect.Descriptor instead.
 func (*GetStatsResponse) Descriptor() ([]byte, []int) {
-	return file_proto_upf_proto_rawDescGZIP(), []int{5}
+	return file_upf_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *GetStatsResponse) GetRuleId() string {
@@ -368,11 +378,25 @@ func (x *GetStatsResponse) GetActive() bool {
 	return false
 }
 
-var File_proto_upf_proto protoreflect.FileDescriptor
+func (x *GetStatsResponse) GetSessionId() string {
+	if x != nil {
+		return x.SessionId
+	}
+	return ""
+}
 
-const file_proto_upf_proto_rawDesc = "" +
+func (x *GetStatsResponse) GetUeId() string {
+	if x != nil {
+		return x.UeId
+	}
+	return ""
+}
+
+var File_upf_proto protoreflect.FileDescriptor
+
+const file_upf_proto_rawDesc = "" +
 	"\n" +
-	"\x0fproto/upf.proto\x12\x03upf\"n\n" +
+	"\tupf.proto\x12\x03upf\"n\n" +
 	"\x11CreateRuleRequest\x12\x1d\n" +
 	"\n" +
 	"session_id\x18\x01 \x01(\tR\tsessionId\x12\x13\n" +
@@ -389,14 +413,19 @@ const file_proto_upf_proto_rawDesc = "" +
 	"session_id\x18\x02 \x01(\tR\tsessionId\"H\n" +
 	"\x12DeleteRuleResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\"*\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"I\n" +
 	"\x0fGetStatsRequest\x12\x17\n" +
-	"\arule_id\x18\x01 \x01(\tR\x06ruleId\"\x85\x01\n" +
+	"\arule_id\x18\x01 \x01(\tR\x06ruleId\x12\x1d\n" +
+	"\n" +
+	"session_id\x18\x02 \x01(\tR\tsessionId\"\xb9\x01\n" +
 	"\x10GetStatsResponse\x12\x17\n" +
 	"\arule_id\x18\x01 \x01(\tR\x06ruleId\x12\x13\n" +
 	"\x05ue_ip\x18\x02 \x01(\tR\x04ueIp\x12+\n" +
 	"\x11packets_forwarded\x18\x03 \x01(\x04R\x10packetsForwarded\x12\x16\n" +
-	"\x06active\x18\x04 \x01(\bR\x06active2\xc3\x01\n" +
+	"\x06active\x18\x04 \x01(\bR\x06active\x12\x1d\n" +
+	"\n" +
+	"session_id\x18\x05 \x01(\tR\tsessionId\x12\x13\n" +
+	"\x05ue_id\x18\x06 \x01(\tR\x04ueId2\xc3\x01\n" +
 	"\n" +
 	"UPFService\x12=\n" +
 	"\n" +
@@ -406,19 +435,19 @@ const file_proto_upf_proto_rawDesc = "" +
 	"\bGetStats\x12\x14.upf.GetStatsRequest\x1a\x15.upf.GetStatsResponseB\x1eZ\x1cgithub.com/5g-core/proto/upfb\x06proto3"
 
 var (
-	file_proto_upf_proto_rawDescOnce sync.Once
-	file_proto_upf_proto_rawDescData []byte
+	file_upf_proto_rawDescOnce sync.Once
+	file_upf_proto_rawDescData []byte
 )
 
-func file_proto_upf_proto_rawDescGZIP() []byte {
-	file_proto_upf_proto_rawDescOnce.Do(func() {
-		file_proto_upf_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_proto_upf_proto_rawDesc), len(file_proto_upf_proto_rawDesc)))
+func file_upf_proto_rawDescGZIP() []byte {
+	file_upf_proto_rawDescOnce.Do(func() {
+		file_upf_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_upf_proto_rawDesc), len(file_upf_proto_rawDesc)))
 	})
-	return file_proto_upf_proto_rawDescData
+	return file_upf_proto_rawDescData
 }
 
-var file_proto_upf_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
-var file_proto_upf_proto_goTypes = []any{
+var file_upf_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_upf_proto_goTypes = []any{
 	(*CreateRuleRequest)(nil),  // 0: upf.CreateRuleRequest
 	(*CreateRuleResponse)(nil), // 1: upf.CreateRuleResponse
 	(*DeleteRuleRequest)(nil),  // 2: upf.DeleteRuleRequest
@@ -426,7 +455,7 @@ var file_proto_upf_proto_goTypes = []any{
 	(*GetStatsRequest)(nil),    // 4: upf.GetStatsRequest
 	(*GetStatsResponse)(nil),   // 5: upf.GetStatsResponse
 }
-var file_proto_upf_proto_depIdxs = []int32{
+var file_upf_proto_depIdxs = []int32{
 	0, // 0: upf.UPFService.CreateRule:input_type -> upf.CreateRuleRequest
 	2, // 1: upf.UPFService.DeleteRule:input_type -> upf.DeleteRuleRequest
 	4, // 2: upf.UPFService.GetStats:input_type -> upf.GetStatsRequest
@@ -440,26 +469,26 @@ var file_proto_upf_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_proto_upf_proto_init() }
-func file_proto_upf_proto_init() {
-	if File_proto_upf_proto != nil {
+func init() { file_upf_proto_init() }
+func file_upf_proto_init() {
+	if File_upf_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_upf_proto_rawDesc), len(file_proto_upf_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_upf_proto_rawDesc), len(file_upf_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_proto_upf_proto_goTypes,
-		DependencyIndexes: file_proto_upf_proto_depIdxs,
-		MessageInfos:      file_proto_upf_proto_msgTypes,
+		GoTypes:           file_upf_proto_goTypes,
+		DependencyIndexes: file_upf_proto_depIdxs,
+		MessageInfos:      file_upf_proto_msgTypes,
 	}.Build()
-	File_proto_upf_proto = out.File
-	file_proto_upf_proto_goTypes = nil
-	file_proto_upf_proto_depIdxs = nil
+	File_upf_proto = out.File
+	file_upf_proto_goTypes = nil
+	file_upf_proto_depIdxs = nil
 }

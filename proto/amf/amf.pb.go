@@ -2,17 +2,16 @@
 // versions:
 // 	protoc-gen-go v1.36.11
 // 	protoc        v7.35.0
-// source: proto/amf.proto
+// source: amf.proto
 
 package amf
 
 import (
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
-
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -35,7 +34,7 @@ type RegisterRequest struct {
 
 func (x *RegisterRequest) Reset() {
 	*x = RegisterRequest{}
-	mi := &file_proto_amf_proto_msgTypes[0]
+	mi := &file_amf_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -47,7 +46,7 @@ func (x *RegisterRequest) String() string {
 func (*RegisterRequest) ProtoMessage() {}
 
 func (x *RegisterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_amf_proto_msgTypes[0]
+	mi := &file_amf_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -60,7 +59,7 @@ func (x *RegisterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RegisterRequest.ProtoReflect.Descriptor instead.
 func (*RegisterRequest) Descriptor() ([]byte, []int) {
-	return file_proto_amf_proto_rawDescGZIP(), []int{0}
+	return file_amf_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *RegisterRequest) GetUeId() string {
@@ -97,13 +96,16 @@ type RegisterResponse struct {
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`                 // 是否注册成功
 	AmfUeId       string                 `protobuf:"bytes,2,opt,name=amf_ue_id,json=amfUeId,proto3" json:"amf_ue_id,omitempty"` // AMF 分配的内部ID
 	Message       string                 `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`                  // 附加信息
+	SessionId     string                 `protobuf:"bytes,4,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
+	UeIp          string                 `protobuf:"bytes,5,opt,name=ue_ip,json=ueIp,proto3" json:"ue_ip,omitempty"`
+	ProcessingMs  float64                `protobuf:"fixed64,6,opt,name=processing_ms,json=processingMs,proto3" json:"processing_ms,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *RegisterResponse) Reset() {
 	*x = RegisterResponse{}
-	mi := &file_proto_amf_proto_msgTypes[1]
+	mi := &file_amf_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -115,7 +117,7 @@ func (x *RegisterResponse) String() string {
 func (*RegisterResponse) ProtoMessage() {}
 
 func (x *RegisterResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_amf_proto_msgTypes[1]
+	mi := &file_amf_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -128,7 +130,7 @@ func (x *RegisterResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RegisterResponse.ProtoReflect.Descriptor instead.
 func (*RegisterResponse) Descriptor() ([]byte, []int) {
-	return file_proto_amf_proto_rawDescGZIP(), []int{1}
+	return file_amf_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *RegisterResponse) GetSuccess() bool {
@@ -152,6 +154,27 @@ func (x *RegisterResponse) GetMessage() string {
 	return ""
 }
 
+func (x *RegisterResponse) GetSessionId() string {
+	if x != nil {
+		return x.SessionId
+	}
+	return ""
+}
+
+func (x *RegisterResponse) GetUeIp() string {
+	if x != nil {
+		return x.UeIp
+	}
+	return ""
+}
+
+func (x *RegisterResponse) GetProcessingMs() float64 {
+	if x != nil {
+		return x.ProcessingMs
+	}
+	return 0
+}
+
 // UE 发起断开请求
 type DeregisterRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -163,7 +186,7 @@ type DeregisterRequest struct {
 
 func (x *DeregisterRequest) Reset() {
 	*x = DeregisterRequest{}
-	mi := &file_proto_amf_proto_msgTypes[2]
+	mi := &file_amf_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -175,7 +198,7 @@ func (x *DeregisterRequest) String() string {
 func (*DeregisterRequest) ProtoMessage() {}
 
 func (x *DeregisterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_amf_proto_msgTypes[2]
+	mi := &file_amf_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -188,7 +211,7 @@ func (x *DeregisterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeregisterRequest.ProtoReflect.Descriptor instead.
 func (*DeregisterRequest) Descriptor() ([]byte, []int) {
-	return file_proto_amf_proto_rawDescGZIP(), []int{2}
+	return file_amf_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *DeregisterRequest) GetUeId() string {
@@ -216,7 +239,7 @@ type DeregisterResponse struct {
 
 func (x *DeregisterResponse) Reset() {
 	*x = DeregisterResponse{}
-	mi := &file_proto_amf_proto_msgTypes[3]
+	mi := &file_amf_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -228,7 +251,7 @@ func (x *DeregisterResponse) String() string {
 func (*DeregisterResponse) ProtoMessage() {}
 
 func (x *DeregisterResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_amf_proto_msgTypes[3]
+	mi := &file_amf_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -241,7 +264,7 @@ func (x *DeregisterResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeregisterResponse.ProtoReflect.Descriptor instead.
 func (*DeregisterResponse) Descriptor() ([]byte, []int) {
-	return file_proto_amf_proto_rawDescGZIP(), []int{3}
+	return file_amf_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *DeregisterResponse) GetSuccess() bool {
@@ -258,83 +281,230 @@ func (x *DeregisterResponse) GetMessage() string {
 	return ""
 }
 
-var File_proto_amf_proto protoreflect.FileDescriptor
+type GetUERequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UeId          string                 `protobuf:"bytes,1,opt,name=ue_id,json=ueId,proto3" json:"ue_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
 
-const file_proto_amf_proto_rawDesc = "" +
+func (x *GetUERequest) Reset() {
+	*x = GetUERequest{}
+	mi := &file_amf_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUERequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUERequest) ProtoMessage() {}
+
+func (x *GetUERequest) ProtoReflect() protoreflect.Message {
+	mi := &file_amf_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUERequest.ProtoReflect.Descriptor instead.
+func (*GetUERequest) Descriptor() ([]byte, []int) {
+	return file_amf_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *GetUERequest) GetUeId() string {
+	if x != nil {
+		return x.UeId
+	}
+	return ""
+}
+
+type GetUEResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Found         bool                   `protobuf:"varint,1,opt,name=found,proto3" json:"found,omitempty"`
+	UeId          string                 `protobuf:"bytes,2,opt,name=ue_id,json=ueId,proto3" json:"ue_id,omitempty"`
+	AmfUeId       string                 `protobuf:"bytes,3,opt,name=amf_ue_id,json=amfUeId,proto3" json:"amf_ue_id,omitempty"`
+	SessionId     string                 `protobuf:"bytes,4,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
+	UeIp          string                 `protobuf:"bytes,5,opt,name=ue_ip,json=ueIp,proto3" json:"ue_ip,omitempty"`
+	State         string                 `protobuf:"bytes,6,opt,name=state,proto3" json:"state,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUEResponse) Reset() {
+	*x = GetUEResponse{}
+	mi := &file_amf_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUEResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUEResponse) ProtoMessage() {}
+
+func (x *GetUEResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_amf_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUEResponse.ProtoReflect.Descriptor instead.
+func (*GetUEResponse) Descriptor() ([]byte, []int) {
+	return file_amf_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetUEResponse) GetFound() bool {
+	if x != nil {
+		return x.Found
+	}
+	return false
+}
+
+func (x *GetUEResponse) GetUeId() string {
+	if x != nil {
+		return x.UeId
+	}
+	return ""
+}
+
+func (x *GetUEResponse) GetAmfUeId() string {
+	if x != nil {
+		return x.AmfUeId
+	}
+	return ""
+}
+
+func (x *GetUEResponse) GetSessionId() string {
+	if x != nil {
+		return x.SessionId
+	}
+	return ""
+}
+
+func (x *GetUEResponse) GetUeIp() string {
+	if x != nil {
+		return x.UeIp
+	}
+	return ""
+}
+
+func (x *GetUEResponse) GetState() string {
+	if x != nil {
+		return x.State
+	}
+	return ""
+}
+
+var File_amf_proto protoreflect.FileDescriptor
+
+const file_amf_proto_rawDesc = "" +
 	"\n" +
-	"\x0fproto/amf.proto\x12\x03amf\"v\n" +
+	"\tamf.proto\x12\x03amf\"v\n" +
 	"\x0fRegisterRequest\x12\x13\n" +
 	"\x05ue_id\x18\x01 \x01(\tR\x04ueId\x12\x17\n" +
 	"\aue_type\x18\x02 \x01(\tR\x06ueType\x12!\n" +
 	"\fsignal_power\x18\x03 \x01(\x02R\vsignalPower\x12\x12\n" +
-	"\x04sinr\x18\x04 \x01(\x02R\x04sinr\"b\n" +
+	"\x04sinr\x18\x04 \x01(\x02R\x04sinr\"\xbb\x01\n" +
 	"\x10RegisterResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x1a\n" +
 	"\tamf_ue_id\x18\x02 \x01(\tR\aamfUeId\x12\x18\n" +
-	"\amessage\x18\x03 \x01(\tR\amessage\"D\n" +
+	"\amessage\x18\x03 \x01(\tR\amessage\x12\x1d\n" +
+	"\n" +
+	"session_id\x18\x04 \x01(\tR\tsessionId\x12\x13\n" +
+	"\x05ue_ip\x18\x05 \x01(\tR\x04ueIp\x12#\n" +
+	"\rprocessing_ms\x18\x06 \x01(\x01R\fprocessingMs\"D\n" +
 	"\x11DeregisterRequest\x12\x13\n" +
 	"\x05ue_id\x18\x01 \x01(\tR\x04ueId\x12\x1a\n" +
 	"\tamf_ue_id\x18\x02 \x01(\tR\aamfUeId\"H\n" +
 	"\x12DeregisterResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage2\x84\x01\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"#\n" +
+	"\fGetUERequest\x12\x13\n" +
+	"\x05ue_id\x18\x01 \x01(\tR\x04ueId\"\xa0\x01\n" +
+	"\rGetUEResponse\x12\x14\n" +
+	"\x05found\x18\x01 \x01(\bR\x05found\x12\x13\n" +
+	"\x05ue_id\x18\x02 \x01(\tR\x04ueId\x12\x1a\n" +
+	"\tamf_ue_id\x18\x03 \x01(\tR\aamfUeId\x12\x1d\n" +
+	"\n" +
+	"session_id\x18\x04 \x01(\tR\tsessionId\x12\x13\n" +
+	"\x05ue_ip\x18\x05 \x01(\tR\x04ueIp\x12\x14\n" +
+	"\x05state\x18\x06 \x01(\tR\x05state2\xb4\x01\n" +
 	"\n" +
 	"AMFService\x127\n" +
 	"\bRegister\x12\x14.amf.RegisterRequest\x1a\x15.amf.RegisterResponse\x12=\n" +
 	"\n" +
-	"Deregister\x12\x16.amf.DeregisterRequest\x1a\x17.amf.DeregisterResponseB\x1eZ\x1cgithub.com/5g-core/proto/amfb\x06proto3"
+	"Deregister\x12\x16.amf.DeregisterRequest\x1a\x17.amf.DeregisterResponse\x12.\n" +
+	"\x05GetUE\x12\x11.amf.GetUERequest\x1a\x12.amf.GetUEResponseB\x1eZ\x1cgithub.com/5g-core/proto/amfb\x06proto3"
 
 var (
-	file_proto_amf_proto_rawDescOnce sync.Once
-	file_proto_amf_proto_rawDescData []byte
+	file_amf_proto_rawDescOnce sync.Once
+	file_amf_proto_rawDescData []byte
 )
 
-func file_proto_amf_proto_rawDescGZIP() []byte {
-	file_proto_amf_proto_rawDescOnce.Do(func() {
-		file_proto_amf_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_proto_amf_proto_rawDesc), len(file_proto_amf_proto_rawDesc)))
+func file_amf_proto_rawDescGZIP() []byte {
+	file_amf_proto_rawDescOnce.Do(func() {
+		file_amf_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_amf_proto_rawDesc), len(file_amf_proto_rawDesc)))
 	})
-	return file_proto_amf_proto_rawDescData
+	return file_amf_proto_rawDescData
 }
 
-var file_proto_amf_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
-var file_proto_amf_proto_goTypes = []any{
+var file_amf_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_amf_proto_goTypes = []any{
 	(*RegisterRequest)(nil),    // 0: amf.RegisterRequest
 	(*RegisterResponse)(nil),   // 1: amf.RegisterResponse
 	(*DeregisterRequest)(nil),  // 2: amf.DeregisterRequest
 	(*DeregisterResponse)(nil), // 3: amf.DeregisterResponse
+	(*GetUERequest)(nil),       // 4: amf.GetUERequest
+	(*GetUEResponse)(nil),      // 5: amf.GetUEResponse
 }
-var file_proto_amf_proto_depIdxs = []int32{
+var file_amf_proto_depIdxs = []int32{
 	0, // 0: amf.AMFService.Register:input_type -> amf.RegisterRequest
 	2, // 1: amf.AMFService.Deregister:input_type -> amf.DeregisterRequest
-	1, // 2: amf.AMFService.Register:output_type -> amf.RegisterResponse
-	3, // 3: amf.AMFService.Deregister:output_type -> amf.DeregisterResponse
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
+	4, // 2: amf.AMFService.GetUE:input_type -> amf.GetUERequest
+	1, // 3: amf.AMFService.Register:output_type -> amf.RegisterResponse
+	3, // 4: amf.AMFService.Deregister:output_type -> amf.DeregisterResponse
+	5, // 5: amf.AMFService.GetUE:output_type -> amf.GetUEResponse
+	3, // [3:6] is the sub-list for method output_type
+	0, // [0:3] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_proto_amf_proto_init() }
-func file_proto_amf_proto_init() {
-	if File_proto_amf_proto != nil {
+func init() { file_amf_proto_init() }
+func file_amf_proto_init() {
+	if File_amf_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_amf_proto_rawDesc), len(file_proto_amf_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_amf_proto_rawDesc), len(file_amf_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_proto_amf_proto_goTypes,
-		DependencyIndexes: file_proto_amf_proto_depIdxs,
-		MessageInfos:      file_proto_amf_proto_msgTypes,
+		GoTypes:           file_amf_proto_goTypes,
+		DependencyIndexes: file_amf_proto_depIdxs,
+		MessageInfos:      file_amf_proto_msgTypes,
 	}.Build()
-	File_proto_amf_proto = out.File
-	file_proto_amf_proto_goTypes = nil
-	file_proto_amf_proto_depIdxs = nil
+	File_amf_proto = out.File
+	file_amf_proto_goTypes = nil
+	file_amf_proto_depIdxs = nil
 }

@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.1
 // - protoc             v7.35.0
-// source: proto/smf.proto
+// source: smf.proto
 
 package smf
 
@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	SMFService_CreateSession_FullMethodName = "/smf.SMFService/CreateSession"
 	SMFService_DeleteSession_FullMethodName = "/smf.SMFService/DeleteSession"
+	SMFService_GetSession_FullMethodName    = "/smf.SMFService/GetSession"
 )
 
 // SMFServiceClient is the client API for SMFService service.
@@ -29,6 +30,7 @@ const (
 type SMFServiceClient interface {
 	CreateSession(ctx context.Context, in *CreateSessionRequest, opts ...grpc.CallOption) (*CreateSessionResponse, error)
 	DeleteSession(ctx context.Context, in *DeleteSessionRequest, opts ...grpc.CallOption) (*DeleteSessionResponse, error)
+	GetSession(ctx context.Context, in *GetSessionRequest, opts ...grpc.CallOption) (*GetSessionResponse, error)
 }
 
 type sMFServiceClient struct {
@@ -59,12 +61,23 @@ func (c *sMFServiceClient) DeleteSession(ctx context.Context, in *DeleteSessionR
 	return out, nil
 }
 
+func (c *sMFServiceClient) GetSession(ctx context.Context, in *GetSessionRequest, opts ...grpc.CallOption) (*GetSessionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSessionResponse)
+	err := c.cc.Invoke(ctx, SMFService_GetSession_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SMFServiceServer is the server API for SMFService service.
 // All implementations must embed UnimplementedSMFServiceServer
 // for forward compatibility.
 type SMFServiceServer interface {
 	CreateSession(context.Context, *CreateSessionRequest) (*CreateSessionResponse, error)
 	DeleteSession(context.Context, *DeleteSessionRequest) (*DeleteSessionResponse, error)
+	GetSession(context.Context, *GetSessionRequest) (*GetSessionResponse, error)
 	mustEmbedUnimplementedSMFServiceServer()
 }
 
@@ -80,6 +93,9 @@ func (UnimplementedSMFServiceServer) CreateSession(context.Context, *CreateSessi
 }
 func (UnimplementedSMFServiceServer) DeleteSession(context.Context, *DeleteSessionRequest) (*DeleteSessionResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteSession not implemented")
+}
+func (UnimplementedSMFServiceServer) GetSession(context.Context, *GetSessionRequest) (*GetSessionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSession not implemented")
 }
 func (UnimplementedSMFServiceServer) mustEmbedUnimplementedSMFServiceServer() {}
 func (UnimplementedSMFServiceServer) testEmbeddedByValue()                    {}
@@ -138,6 +154,24 @@ func _SMFService_DeleteSession_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SMFService_GetSession_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSessionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SMFServiceServer).GetSession(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SMFService_GetSession_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SMFServiceServer).GetSession(ctx, req.(*GetSessionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // SMFService_ServiceDesc is the grpc.ServiceDesc for SMFService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -153,7 +187,11 @@ var SMFService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "DeleteSession",
 			Handler:    _SMFService_DeleteSession_Handler,
 		},
+		{
+			MethodName: "GetSession",
+			Handler:    _SMFService_GetSession_Handler,
+		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/smf.proto",
+	Metadata: "smf.proto",
 }

@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: amf, labels: {app: amf}}
+spec:
+  # 状态目前保存在内存中，未接共享存储前保持单副本。
+  replicas: 1
+  selector: {matchLabels: {app: amf}}
+  template:
+    metadata: {labels: {app: amf}}
+    spec:
+      containers:
+        - name: amf
+          image: litecore-amf:latest
+          imagePullPolicy: IfNotPresent
+          env: [{name: SMF_ADDRESS, value: "smf:50052"}]
+          ports: [{name: grpc, containerPort: 50051}]
+          readinessProbe: {tcpSocket: {port: grpc}, initialDelaySeconds: 2, periodSeconds: 3}
+          livenessProbe: {tcpSocket: {port: grpc}, initialDelaySeconds: 5, periodSeconds: 5}
+          resources:
+            requests: {cpu: 25m, memory: 32Mi}
+            limits: {cpu: 500m, memory: 128Mi}
+---
+apiVersion: v1
+kind: Service
+metadata: {name: amf}
+spec:
+  selector: {app: amf}
+  ports: [{name: grpc, port: 50051, targetPort: grpc}]

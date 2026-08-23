@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.11
 // 	protoc        v7.35.0
-// source: proto/smf.proto
+// source: smf.proto
 
 package smf
 
@@ -33,7 +33,7 @@ type CreateSessionRequest struct {
 
 func (x *CreateSessionRequest) Reset() {
 	*x = CreateSessionRequest{}
-	mi := &file_proto_smf_proto_msgTypes[0]
+	mi := &file_smf_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -45,7 +45,7 @@ func (x *CreateSessionRequest) String() string {
 func (*CreateSessionRequest) ProtoMessage() {}
 
 func (x *CreateSessionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_smf_proto_msgTypes[0]
+	mi := &file_smf_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -58,7 +58,7 @@ func (x *CreateSessionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateSessionRequest.ProtoReflect.Descriptor instead.
 func (*CreateSessionRequest) Descriptor() ([]byte, []int) {
-	return file_proto_smf_proto_rawDescGZIP(), []int{0}
+	return file_smf_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *CreateSessionRequest) GetUeId() string {
@@ -89,13 +89,14 @@ type CreateSessionResponse struct {
 	SessionId     string                 `protobuf:"bytes,2,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"` // SMF分配的会话ID
 	UeIp          string                 `protobuf:"bytes,3,opt,name=ue_ip,json=ueIp,proto3" json:"ue_ip,omitempty"`                // 分配给UE的IP地址
 	Message       string                 `protobuf:"bytes,4,opt,name=message,proto3" json:"message,omitempty"`
+	RuleId        string                 `protobuf:"bytes,5,opt,name=rule_id,json=ruleId,proto3" json:"rule_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CreateSessionResponse) Reset() {
 	*x = CreateSessionResponse{}
-	mi := &file_proto_smf_proto_msgTypes[1]
+	mi := &file_smf_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -107,7 +108,7 @@ func (x *CreateSessionResponse) String() string {
 func (*CreateSessionResponse) ProtoMessage() {}
 
 func (x *CreateSessionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_smf_proto_msgTypes[1]
+	mi := &file_smf_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -120,7 +121,7 @@ func (x *CreateSessionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateSessionResponse.ProtoReflect.Descriptor instead.
 func (*CreateSessionResponse) Descriptor() ([]byte, []int) {
-	return file_proto_smf_proto_rawDescGZIP(), []int{1}
+	return file_smf_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *CreateSessionResponse) GetSuccess() bool {
@@ -151,6 +152,13 @@ func (x *CreateSessionResponse) GetMessage() string {
 	return ""
 }
 
+func (x *CreateSessionResponse) GetRuleId() string {
+	if x != nil {
+		return x.RuleId
+	}
+	return ""
+}
+
 // 删除会话
 type DeleteSessionRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -162,7 +170,7 @@ type DeleteSessionRequest struct {
 
 func (x *DeleteSessionRequest) Reset() {
 	*x = DeleteSessionRequest{}
-	mi := &file_proto_smf_proto_msgTypes[2]
+	mi := &file_smf_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -174,7 +182,7 @@ func (x *DeleteSessionRequest) String() string {
 func (*DeleteSessionRequest) ProtoMessage() {}
 
 func (x *DeleteSessionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_smf_proto_msgTypes[2]
+	mi := &file_smf_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -187,7 +195,7 @@ func (x *DeleteSessionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteSessionRequest.ProtoReflect.Descriptor instead.
 func (*DeleteSessionRequest) Descriptor() ([]byte, []int) {
-	return file_proto_smf_proto_rawDescGZIP(), []int{2}
+	return file_smf_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *DeleteSessionRequest) GetSessionId() string {
@@ -214,7 +222,7 @@ type DeleteSessionResponse struct {
 
 func (x *DeleteSessionResponse) Reset() {
 	*x = DeleteSessionResponse{}
-	mi := &file_proto_smf_proto_msgTypes[3]
+	mi := &file_smf_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -226,7 +234,7 @@ func (x *DeleteSessionResponse) String() string {
 func (*DeleteSessionResponse) ProtoMessage() {}
 
 func (x *DeleteSessionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_smf_proto_msgTypes[3]
+	mi := &file_smf_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -239,7 +247,7 @@ func (x *DeleteSessionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteSessionResponse.ProtoReflect.Descriptor instead.
 func (*DeleteSessionResponse) Descriptor() ([]byte, []int) {
-	return file_proto_smf_proto_rawDescGZIP(), []int{3}
+	return file_smf_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *DeleteSessionResponse) GetSuccess() bool {
@@ -256,84 +264,230 @@ func (x *DeleteSessionResponse) GetMessage() string {
 	return ""
 }
 
-var File_proto_smf_proto protoreflect.FileDescriptor
+type GetSessionRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	SessionId     string                 `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
 
-const file_proto_smf_proto_rawDesc = "" +
+func (x *GetSessionRequest) Reset() {
+	*x = GetSessionRequest{}
+	mi := &file_smf_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetSessionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSessionRequest) ProtoMessage() {}
+
+func (x *GetSessionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_smf_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSessionRequest.ProtoReflect.Descriptor instead.
+func (*GetSessionRequest) Descriptor() ([]byte, []int) {
+	return file_smf_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *GetSessionRequest) GetSessionId() string {
+	if x != nil {
+		return x.SessionId
+	}
+	return ""
+}
+
+type GetSessionResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Found         bool                   `protobuf:"varint,1,opt,name=found,proto3" json:"found,omitempty"`
+	SessionId     string                 `protobuf:"bytes,2,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
+	UeId          string                 `protobuf:"bytes,3,opt,name=ue_id,json=ueId,proto3" json:"ue_id,omitempty"`
+	UeIp          string                 `protobuf:"bytes,4,opt,name=ue_ip,json=ueIp,proto3" json:"ue_ip,omitempty"`
+	RuleId        string                 `protobuf:"bytes,5,opt,name=rule_id,json=ruleId,proto3" json:"rule_id,omitempty"`
+	State         string                 `protobuf:"bytes,6,opt,name=state,proto3" json:"state,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetSessionResponse) Reset() {
+	*x = GetSessionResponse{}
+	mi := &file_smf_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetSessionResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSessionResponse) ProtoMessage() {}
+
+func (x *GetSessionResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_smf_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSessionResponse.ProtoReflect.Descriptor instead.
+func (*GetSessionResponse) Descriptor() ([]byte, []int) {
+	return file_smf_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetSessionResponse) GetFound() bool {
+	if x != nil {
+		return x.Found
+	}
+	return false
+}
+
+func (x *GetSessionResponse) GetSessionId() string {
+	if x != nil {
+		return x.SessionId
+	}
+	return ""
+}
+
+func (x *GetSessionResponse) GetUeId() string {
+	if x != nil {
+		return x.UeId
+	}
+	return ""
+}
+
+func (x *GetSessionResponse) GetUeIp() string {
+	if x != nil {
+		return x.UeIp
+	}
+	return ""
+}
+
+func (x *GetSessionResponse) GetRuleId() string {
+	if x != nil {
+		return x.RuleId
+	}
+	return ""
+}
+
+func (x *GetSessionResponse) GetState() string {
+	if x != nil {
+		return x.State
+	}
+	return ""
+}
+
+var File_smf_proto protoreflect.FileDescriptor
+
+const file_smf_proto_rawDesc = "" +
 	"\n" +
-	"\x0fproto/smf.proto\x12\x03smf\"Y\n" +
+	"\tsmf.proto\x12\x03smf\"Y\n" +
 	"\x14CreateSessionRequest\x12\x13\n" +
 	"\x05ue_id\x18\x01 \x01(\tR\x04ueId\x12\x1a\n" +
 	"\tamf_ue_id\x18\x02 \x01(\tR\aamfUeId\x12\x10\n" +
-	"\x03dnn\x18\x03 \x01(\tR\x03dnn\"\x7f\n" +
+	"\x03dnn\x18\x03 \x01(\tR\x03dnn\"\x98\x01\n" +
 	"\x15CreateSessionResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x1d\n" +
 	"\n" +
 	"session_id\x18\x02 \x01(\tR\tsessionId\x12\x13\n" +
 	"\x05ue_ip\x18\x03 \x01(\tR\x04ueIp\x12\x18\n" +
-	"\amessage\x18\x04 \x01(\tR\amessage\"J\n" +
+	"\amessage\x18\x04 \x01(\tR\amessage\x12\x17\n" +
+	"\arule_id\x18\x05 \x01(\tR\x06ruleId\"J\n" +
 	"\x14DeleteSessionRequest\x12\x1d\n" +
 	"\n" +
 	"session_id\x18\x01 \x01(\tR\tsessionId\x12\x13\n" +
 	"\x05ue_id\x18\x02 \x01(\tR\x04ueId\"K\n" +
 	"\x15DeleteSessionResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage2\x9c\x01\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"2\n" +
+	"\x11GetSessionRequest\x12\x1d\n" +
+	"\n" +
+	"session_id\x18\x01 \x01(\tR\tsessionId\"\xa2\x01\n" +
+	"\x12GetSessionResponse\x12\x14\n" +
+	"\x05found\x18\x01 \x01(\bR\x05found\x12\x1d\n" +
+	"\n" +
+	"session_id\x18\x02 \x01(\tR\tsessionId\x12\x13\n" +
+	"\x05ue_id\x18\x03 \x01(\tR\x04ueId\x12\x13\n" +
+	"\x05ue_ip\x18\x04 \x01(\tR\x04ueIp\x12\x17\n" +
+	"\arule_id\x18\x05 \x01(\tR\x06ruleId\x12\x14\n" +
+	"\x05state\x18\x06 \x01(\tR\x05state2\xdb\x01\n" +
 	"\n" +
 	"SMFService\x12F\n" +
 	"\rCreateSession\x12\x19.smf.CreateSessionRequest\x1a\x1a.smf.CreateSessionResponse\x12F\n" +
-	"\rDeleteSession\x12\x19.smf.DeleteSessionRequest\x1a\x1a.smf.DeleteSessionResponseB\x1eZ\x1cgithub.com/5g-core/proto/smfb\x06proto3"
+	"\rDeleteSession\x12\x19.smf.DeleteSessionRequest\x1a\x1a.smf.DeleteSessionResponse\x12=\n" +
+	"\n" +
+	"GetSession\x12\x16.smf.GetSessionRequest\x1a\x17.smf.GetSessionResponseB\x1eZ\x1cgithub.com/5g-core/proto/smfb\x06proto3"
 
 var (
-	file_proto_smf_proto_rawDescOnce sync.Once
-	file_proto_smf_proto_rawDescData []byte
+	file_smf_proto_rawDescOnce sync.Once
+	file_smf_proto_rawDescData []byte
 )
 
-func file_proto_smf_proto_rawDescGZIP() []byte {
-	file_proto_smf_proto_rawDescOnce.Do(func() {
-		file_proto_smf_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_proto_smf_proto_rawDesc), len(file_proto_smf_proto_rawDesc)))
+func file_smf_proto_rawDescGZIP() []byte {
+	file_smf_proto_rawDescOnce.Do(func() {
+		file_smf_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_smf_proto_rawDesc), len(file_smf_proto_rawDesc)))
 	})
-	return file_proto_smf_proto_rawDescData
+	return file_smf_proto_rawDescData
 }
 
-var file_proto_smf_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
-var file_proto_smf_proto_goTypes = []any{
+var file_smf_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_smf_proto_goTypes = []any{
 	(*CreateSessionRequest)(nil),  // 0: smf.CreateSessionRequest
 	(*CreateSessionResponse)(nil), // 1: smf.CreateSessionResponse
 	(*DeleteSessionRequest)(nil),  // 2: smf.DeleteSessionRequest
 	(*DeleteSessionResponse)(nil), // 3: smf.DeleteSessionResponse
+	(*GetSessionRequest)(nil),     // 4: smf.GetSessionRequest
+	(*GetSessionResponse)(nil),    // 5: smf.GetSessionResponse
 }
-var file_proto_smf_proto_depIdxs = []int32{
+var file_smf_proto_depIdxs = []int32{
 	0, // 0: smf.SMFService.CreateSession:input_type -> smf.CreateSessionRequest
 	2, // 1: smf.SMFService.DeleteSession:input_type -> smf.DeleteSessionRequest
-	1, // 2: smf.SMFService.CreateSession:output_type -> smf.CreateSessionResponse
-	3, // 3: smf.SMFService.DeleteSession:output_type -> smf.DeleteSessionResponse
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
+	4, // 2: smf.SMFService.GetSession:input_type -> smf.GetSessionRequest
+	1, // 3: smf.SMFService.CreateSession:output_type -> smf.CreateSessionResponse
+	3, // 4: smf.SMFService.DeleteSession:output_type -> smf.DeleteSessionResponse
+	5, // 5: smf.SMFService.GetSession:output_type -> smf.GetSessionResponse
+	3, // [3:6] is the sub-list for method output_type
+	0, // [0:3] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_proto_smf_proto_init() }
-func file_proto_smf_proto_init() {
-	if File_proto_smf_proto != nil {
+func init() { file_smf_proto_init() }
+func file_smf_proto_init() {
+	if File_smf_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_smf_proto_rawDesc), len(file_proto_smf_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_smf_proto_rawDesc), len(file_smf_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_proto_smf_proto_goTypes,
-		DependencyIndexes: file_proto_smf_proto_depIdxs,
-		MessageInfos:      file_proto_smf_proto_msgTypes,
+		GoTypes:           file_smf_proto_goTypes,
+		DependencyIndexes: file_smf_proto_depIdxs,
+		MessageInfos:      file_smf_proto_msgTypes,
 	}.Build()
-	File_proto_smf_proto = out.File
-	file_proto_smf_proto_goTypes = nil
-	file_proto_smf_proto_depIdxs = nil
+	File_smf_proto = out.File
+	file_smf_proto_goTypes = nil
+	file_smf_proto_depIdxs = nil
 }

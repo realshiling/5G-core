@@ -32,6 +32,7 @@ message DeleteRuleResponse {
 // 查询转发规则（用于调试和监控）
 message GetStatsRequest {
   string rule_id = 1;
+  string session_id = 2;
 }
 
 message GetStatsResponse {
@@ -39,6 +40,8 @@ message GetStatsResponse {
   string ue_ip          = 2;
   uint64 packets_forwarded = 3;  // 已转发包数量
   bool   active         = 4;
+  string session_id     = 5;
+  string ue_id          = 6;
 }
 
 service UPFService {
