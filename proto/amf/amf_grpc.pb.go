@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.1
 // - protoc             v7.35.0
-// source: proto/amf.proto
+// source: amf.proto
 
 package amf
 
@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	AMFService_Register_FullMethodName   = "/amf.AMFService/Register"
 	AMFService_Deregister_FullMethodName = "/amf.AMFService/Deregister"
+	AMFService_GetUE_FullMethodName      = "/amf.AMFService/GetUE"
 )
 
 // AMFServiceClient is the client API for AMFService service.
@@ -31,6 +32,7 @@ const (
 type AMFServiceClient interface {
 	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error)
 	Deregister(ctx context.Context, in *DeregisterRequest, opts ...grpc.CallOption) (*DeregisterResponse, error)
+	GetUE(ctx context.Context, in *GetUERequest, opts ...grpc.CallOption) (*GetUEResponse, error)
 }
 
 type aMFServiceClient struct {
@@ -61,6 +63,16 @@ func (c *aMFServiceClient) Deregister(ctx context.Context, in *DeregisterRequest
 	return out, nil
 }
 
+func (c *aMFServiceClient) GetUE(ctx context.Context, in *GetUERequest, opts ...grpc.CallOption) (*GetUEResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUEResponse)
+	err := c.cc.Invoke(ctx, AMFService_GetUE_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AMFServiceServer is the server API for AMFService service.
 // All implementations must embed UnimplementedAMFServiceServer
 // for forward compatibility.
@@ -69,6 +81,7 @@ func (c *aMFServiceClient) Deregister(ctx context.Context, in *DeregisterRequest
 type AMFServiceServer interface {
 	Register(context.Context, *RegisterRequest) (*RegisterResponse, error)
 	Deregister(context.Context, *DeregisterRequest) (*DeregisterResponse, error)
+	GetUE(context.Context, *GetUERequest) (*GetUEResponse, error)
 	mustEmbedUnimplementedAMFServiceServer()
 }
 
@@ -84,6 +97,9 @@ func (UnimplementedAMFServiceServer) Register(context.Context, *RegisterRequest)
 }
 func (UnimplementedAMFServiceServer) Deregister(context.Context, *DeregisterRequest) (*DeregisterResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method Deregister not implemented")
+}
+func (UnimplementedAMFServiceServer) GetUE(context.Context, *GetUERequest) (*GetUEResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetUE not implemented")
 }
 func (UnimplementedAMFServiceServer) mustEmbedUnimplementedAMFServiceServer() {}
 func (UnimplementedAMFServiceServer) testEmbeddedByValue()                    {}
@@ -142,6 +158,24 @@ func _AMFService_Deregister_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AMFService_GetUE_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUERequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AMFServiceServer).GetUE(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AMFService_GetUE_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AMFServiceServer).GetUE(ctx, req.(*GetUERequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AMFService_ServiceDesc is the grpc.ServiceDesc for AMFService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -157,7 +191,11 @@ var AMFService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "Deregister",
 			Handler:    _AMFService_Deregister_Handler,
 		},
+		{
+			MethodName: "GetUE",
+			Handler:    _AMFService_GetUE_Handler,
+		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/amf.proto",
+	Metadata: "amf.proto",
 }

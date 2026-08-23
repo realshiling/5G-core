@@ -1,0 +1,7 @@
+.DS_Store
+results/
+coverage.out
+amf/amf
+smf/smf
+upf/upf
+ue/ue

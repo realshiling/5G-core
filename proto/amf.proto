@@ -17,6 +17,9 @@ message RegisterResponse {
   bool   success   = 1;  // 是否注册成功
   string amf_ue_id = 2;  // AMF 分配的内部ID
   string message   = 3;  // 附加信息
+  string session_id = 4;
+  string ue_ip = 5;
+  double processing_ms = 6;
 }
 
 // UE 发起断开请求
@@ -31,8 +34,20 @@ message DeregisterResponse {
   string message = 2;
 }
 
+message GetUERequest { string ue_id = 1; }
+
+message GetUEResponse {
+  bool found = 1;
+  string ue_id = 2;
+  string amf_ue_id = 3;
+  string session_id = 4;
+  string ue_ip = 5;
+  string state = 6;
+}
+
 // AMF 对外暴露的服务
 service AMFService {
   rpc Register   (RegisterRequest)   returns (RegisterResponse);
   rpc Deregister (DeregisterRequest) returns (DeregisterResponse);
+  rpc GetUE      (GetUERequest)      returns (GetUEResponse);
 }

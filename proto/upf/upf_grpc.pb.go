@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.1
 // - protoc             v7.35.0
-// source: proto/upf.proto
+// source: upf.proto
 
 package upf
 
@@ -193,5 +193,5 @@ var UPFService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/upf.proto",
+	Metadata: "upf.proto",
 }

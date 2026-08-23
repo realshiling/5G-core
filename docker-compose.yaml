@@ -1,0 +1,63 @@
+name: litecore
+
+services:
+  upf:
+    build:
+      context: .
+      dockerfile: upf/Dockerfile
+    image: litecore-upf:latest
+    ports: ["50053:50053"]
+    healthcheck:
+      test: ["CMD", "nc", "-z", "127.0.0.1", "50053"]
+      interval: 3s
+      timeout: 2s
+      retries: 10
+    restart: unless-stopped
+
+  smf:
+    build:
+      context: .
+      dockerfile: smf/Dockerfile
+    image: litecore-smf:latest
+    environment:
+      UPF_ADDRESS: upf:50053
+      IP_POOL_SIZE: "2048"
+    ports: ["50052:50052"]
+    depends_on:
+      upf:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "nc", "-z", "127.0.0.1", "50052"]
+      interval: 3s
+      timeout: 2s
+      retries: 10
+    restart: unless-stopped
+
+  amf:
+    build:
+      context: .
+      dockerfile: amf/Dockerfile
+    image: litecore-amf:latest
+    environment:
+      SMF_ADDRESS: smf:50052
+    ports: ["50051:50051"]
+    depends_on:
+      smf:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "nc", "-z", "127.0.0.1", "50051"]
+      interval: 3s
+      timeout: 2s
+      retries: 10
+    restart: unless-stopped
+
+  ue:
+    profiles: ["tools"]
+    build:
+      context: .
+      dockerfile: ue/Dockerfile
+    image: litecore-ue:latest
+    depends_on:
+      amf:
+        condition: service_healthy
+    command: ["-address", "amf:50051", "-action", "register", "-id", "UE-DEMO", "-scenario", "stable"]
